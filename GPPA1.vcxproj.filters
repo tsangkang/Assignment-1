@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="game.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="image.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="textureManager.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="winmain.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleLife.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="constants.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="gameError.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="image.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="textureManager.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleLife.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header">
+      <UniqueIdentifier>{da3f8482-aec2-4ecb-bd72-0e4741b415d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPP">
+      <UniqueIdentifier>{ebff169a-03dc-4542-9a78-cdbc5a36ef55}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
