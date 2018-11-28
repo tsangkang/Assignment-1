@@ -17,33 +17,36 @@ void CircleLife::initialize(HWND hwnd)
 {
 	Game::initialize(hwnd); // throws GameError
 
-							// nebula texture
-	if (!nebulaTexture.initialize(graphics, NEBULA_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing nebula texture"));
+							// background texture
+	if (!backgroundTexture.initialize(graphics, background_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background texture"));
 	// planet texture
 	if (!planetTexture.initialize(graphics, PLANET_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing planet texture"));
 
-	if (!shipTexture.initialize(graphics, SHIP_IMAGE))
+	if (!circleTexture.initialize(graphics, CIRCLE_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing planet texture"));
 
-	// nebula
-	if (!nebula.initialize(graphics, 0, 0, 0, &nebulaTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing nebula"));
+
+	// background
+	if (!background.initialize(graphics, 0, 0, 0, &backgroundTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
 
 	// planet
 	if (!planet.initialize(graphics, 0, 0, 0, &planetTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing planet"));
 
-	//ship
-	if (!ship.initialize(graphics, SHIP_WIDTH, SHIP_HEIGHT, SHIP_COLS, &shipTexture))
+	//circle
+	if (!circle.initialize(this, circleNS::WIDTH, circleNS::HEIGHT, circleNS::COLS, &circleTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing planet"));
 
 	// place planet in center of screen
 	planet.setX(GAME_WIDTH*0.5f - planet.getWidth()*0.5f);
 	planet.setY(GAME_HEIGHT*0.5f - planet.getHeight()*0.5f);
-	ship.setX(GAME_WIDTH / 4);              // start above and left of planet
-	ship.setY(GAME_HEIGHT / 4);
+	circle.setX(GAME_WIDTH - (GAME_WIDTH - circleNS::WIDTH));              // start above and left of planet
+	circle.setY(GAME_HEIGHT - (GAME_HEIGHT - circleNS::HEIGHT));
+	obstacle1.setX(GAME_WIDTH - 200);
+	obstacle1.setY(GAME_WIDTH - 200);
 
 
 	return;
@@ -51,33 +54,32 @@ void CircleLife::initialize(HWND hwnd)
 // Update all game items
 void CircleLife::update()
 {
-	if (input->isKeyDown(SHIP_RIGHT_KEY))            // if move right
+	if (input->isKeyDown(CIRCLE_RIGHT_KEY))            // if move right
 	{
-		ship.setX(ship.getX() + frameTime * SHIP_SPEED);
-		if (ship.getX() > GAME_WIDTH)               // if off screen right
-			ship.setX((float)-ship.getWidth());  // position off screen left
+		circle.setX(circle.getX() + frameTime * CIRCLE_SPEED);
+		if ((circle.getX() + circleNS::WIDTH) > GAME_WIDTH)               // stops at the right edge
+			circle.setX(GAME_WIDTH - circle.getWidth());  // prevents from moving over the edge
 	}
-	if (input->isKeyDown(SHIP_LEFT_KEY))             // if move left
+	if (input->isKeyDown(CIRCLE_LEFT_KEY))             // if move left
 	{
-		ship.setX(ship.getX() - frameTime * SHIP_SPEED);
-		if (ship.getX() < -ship.getWidth())         // if off screen left
-			ship.setX((float)GAME_WIDTH);      // position off screen right
+		circle.setX(circle.getX() - frameTime * CIRCLE_SPEED);
+		if ((circle.getX() - circleNS::WIDTH) < -circle.getWidth())         // stops at the left edge
+			circle.setX(circle.getWidth()- circleNS::WIDTH);      // prevents from moving over the edge
 	}
-	if (input->isKeyDown(SHIP_UP_KEY))               // if move up
+	if (input->isKeyDown(CIRCLE_UP_KEY))               // if move up
 	{
-		ship.setY(ship.getY() - frameTime * SHIP_SPEED);
-		if (ship.getY() < -ship.getHeight())        // if off screen top
-			ship.setY((float)GAME_HEIGHT);     // position off screen bottom
+		circle.setY(circle.getY() - frameTime * CIRCLE_SPEED);
+		if ((circle.getY() - circleNS::HEIGHT) < -circle.getHeight())        // stops at the top edge
+			circle.setY(0);								 // prevents from moving over the edge
 	}
-	if (input->isKeyDown(SHIP_DOWN_KEY))             // if move down
+	if (input->isKeyDown(CIRCLE_DOWN_KEY))             // if move down
 	{
-		ship.setY(ship.getY() + frameTime * SHIP_SPEED);
-		if (ship.getY() > GAME_HEIGHT)              // if off screen bottom
-			ship.setY((float)-ship.getHeight());    // position off screen top
+		circle.setY(circle.getY() + frameTime * CIRCLE_SPEED);
+		if ((circle.getY() + circleNS::HEIGHT) > GAME_HEIGHT)              // if off screen bottom
+			circle.setY(GAME_HEIGHT- circleNS::HEIGHT);    // position off screen top
 	}
-
-	ship.update(frameTime);
-
+	circle.update(frameTime);
+	obstacle1.update(frameTime);
 }
 
 // Artificial Intelligence
@@ -95,10 +97,10 @@ void CircleLife::render()
 {
 	graphics->spriteBegin();                // begin drawing sprites
 
-	nebula.draw();                          // add the orion nebula to the scene
+	background.draw();                      // add the orion background to the scene
 	planet.draw();                          // add the planet to the scene
-	ship.draw();
-
+	circle.draw();
+	obstacle1.draw();
 	graphics->spriteEnd();                  // end drawing sprites
 }
 // The graphics device was lost.
@@ -106,8 +108,8 @@ void CircleLife::render()
 void CircleLife::releaseAll()
 {
 	planetTexture.onLostDevice();
-	nebulaTexture.onLostDevice();
-	shipTexture.onLostDevice();
+	backgroundTexture.onLostDevice();
+	circleTexture.onLostDevice();
 	Game::releaseAll();
 	return;
 }
@@ -115,9 +117,9 @@ void CircleLife::releaseAll()
 // Recreate all surfaces
 void CircleLife::resetAll()
 {
-	nebulaTexture.onResetDevice();
+	backgroundTexture.onResetDevice();
 	planetTexture.onResetDevice();
-	shipTexture.onResetDevice();
+	circleTexture.onResetDevice();
 	Game::resetAll();
 	return;
 }

@@ -5,6 +5,8 @@
 #include "game.h"
 #include "textureManager.h"
 #include "image.h"
+#include "circle.h"
+#include "obstacles.h"
 
 
 // class declaration to be inserted here
@@ -15,12 +17,13 @@ class CircleLife : public Game
 {
 private:
 	// game items
-	TextureManager nebulaTexture;   // nebula texture
+	TextureManager backgroundTexture;   // background texture
 	TextureManager planetTexture;   // planet texture
-	TextureManager shipTexture;     // ship texture
-	Image   planet;                 // planet image
-	Image   nebula;                 // nebula image
-	Image   ship;                   // ship image
+	TextureManager circleTexture;     // circle texture
+	Image	planet;                 // planet image
+	Image   background;                 // background image
+	Circle   circle;                   // circle image
+	Obstacles obstacle1;
 
 public:
 	// Constructor

@@ -5,7 +5,7 @@
 
 #include <Windows.h>
 
-// Useful macros
+
 
 // Safely delete pointer referenced item
 #define SAFE_DELETE(ptr)       { if (ptr) { delete (ptr); (ptr)=NULL; } }
@@ -17,14 +17,14 @@
 #define SAFE_ON_LOST_DEVICE(ptr)    { if(ptr) { ptr->onLostDevice(); } }
 // Safely call onResetDevice
 #define SAFE_ON_RESET_DEVICE(ptr)   { if(ptr) { ptr->onResetDevice(); } }
-#define TRANSCOLOR  SETCOLOR_ARGB(0,255,0,255)
-
+#define TRANSCOLOR  SETCOLOR_ARGB(255,255,0,255)
 
 //Constants
 // graphic images
-const char NEBULA_IMAGE[] = "pictures\\background1.png";  // photo source NASA/courtesy of nasaimages.org 
+const char background_IMAGE[] = "pictures\\background1.png";  // photo source courtesy of osu
 const char PLANET_IMAGE[] = "pictures\\planet.png"; // picture of planet
-const char SHIP_IMAGE[] = "pictures\\ship4.png";   // spaceship
+const char CIRCLE_IMAGE[] = "pictures\\circle.png";   // player character
+const char OBSTACLE1_IMAGE[] = "pictures\\obstacle1.png"; // obstacle 1
 
 												  // window
 const char CLASS_NAME[] = "CircleLife";
@@ -46,23 +46,18 @@ const float MIN_FRAME_RATE = 10.0f;					// the minimum frame rate
 const float MIN_FRAME_TIME = 1.0f / FRAME_RATE;		// minimum desired time for 1 frame
 const float MAX_FRAME_TIME = 1.0f / MIN_FRAME_RATE;	// maximum time used in calculations
 
-const int SHIP_WIDTH = 32;				 // ship width
-const int SHIP_HEIGHT = 32;				 // ship height
-const int SHIP_COLS = 1;				 // ship columns
-const int  SHIP_START_FRAME = 0;         // starting frame of ship animation
-const int  SHIP_END_FRAME = 0;           // last frame of ship animation
 
-
+const float MASS_PLANET = 1.0e14f;
 
 
 const float ROTATION_RATE = 180.0f;             // degrees per second
 const float SCALE_RATE = 0.2f;                  // % change per second
-const float SHIP_SPEED = 100.0f;                // pixels per second
-const float SHIP_SCALE = 1.5f;                  // starting ship scale
+const float CIRCLE_SPEED = 350.0f;                // pixels per second
+const float CIRCLE_SCALE = 1.5f;                  // starting circle scale
 
-const UCHAR SHIP_RIGHT_KEY = VK_RIGHT;
-const UCHAR SHIP_LEFT_KEY = VK_LEFT;
-const UCHAR SHIP_DOWN_KEY = VK_DOWN;
-const UCHAR SHIP_UP_KEY = VK_UP;
+const UCHAR CIRCLE_RIGHT_KEY = VK_RIGHT;
+const UCHAR CIRCLE_LEFT_KEY = VK_LEFT;
+const UCHAR CIRCLE_DOWN_KEY = VK_DOWN;
+const UCHAR CIRCLE_UP_KEY = VK_UP;
 
 #endif
