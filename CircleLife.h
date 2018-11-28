@@ -18,9 +18,8 @@ class CircleLife : public Game
 private:
 	// game items
 	TextureManager backgroundTexture;   // background texture
-	TextureManager planetTexture;   // planet texture
 	TextureManager circleTexture;     // circle texture
-	Image	planet;                 // planet image
+	TextureManager obstacle1Texture;
 	Image   background;                 // background image
 	Circle   circle;                   // circle image
 	Obstacles obstacle1;

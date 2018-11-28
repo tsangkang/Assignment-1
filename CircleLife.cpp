@@ -17,33 +17,30 @@ void CircleLife::initialize(HWND hwnd)
 {
 	Game::initialize(hwnd); // throws GameError
 
-							// background texture
+							// all the textures
 	if (!backgroundTexture.initialize(graphics, background_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background texture"));
-	// planet texture
-	if (!planetTexture.initialize(graphics, PLANET_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing planet texture"));
 
 	if (!circleTexture.initialize(graphics, CIRCLE_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing planet texture"));
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing circle texture"));
+
+	if (!obstacle1Texture.initialize(graphics, OBSTACLE1_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle1 texture"));
 
 
 	// background
 	if (!background.initialize(graphics, 0, 0, 0, &backgroundTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
 
-	// planet
-	if (!planet.initialize(graphics, 0, 0, 0, &planetTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing planet"));
-
 	//circle
 	if (!circle.initialize(this, circleNS::WIDTH, circleNS::HEIGHT, circleNS::COLS, &circleTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing planet"));
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing circle"));
 
-	// place planet in center of screen
-	planet.setX(GAME_WIDTH*0.5f - planet.getWidth()*0.5f);
-	planet.setY(GAME_HEIGHT*0.5f - planet.getHeight()*0.5f);
-	circle.setX(GAME_WIDTH - (GAME_WIDTH - circleNS::WIDTH));              // start above and left of planet
+	//obstacle1
+	if (!obstacle1.initialize(this, obstaclesNS::WIDTH, obstaclesNS::HEIGHT, obstaclesNS::TEXTURE_COLS, &obstacle1Texture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle1"));
+
+	circle.setX(GAME_WIDTH - (GAME_WIDTH - circleNS::WIDTH));              // start top left
 	circle.setY(GAME_HEIGHT - (GAME_HEIGHT - circleNS::HEIGHT));
 	obstacle1.setX(GAME_WIDTH - 200);
 	obstacle1.setY(GAME_WIDTH - 200);
@@ -98,7 +95,6 @@ void CircleLife::render()
 	graphics->spriteBegin();                // begin drawing sprites
 
 	background.draw();                      // add the orion background to the scene
-	planet.draw();                          // add the planet to the scene
 	circle.draw();
 	obstacle1.draw();
 	graphics->spriteEnd();                  // end drawing sprites
@@ -107,9 +103,9 @@ void CircleLife::render()
 // Release all reserved video memory so graphics device may be reset
 void CircleLife::releaseAll()
 {
-	planetTexture.onLostDevice();
 	backgroundTexture.onLostDevice();
 	circleTexture.onLostDevice();
+	obstacle1Texture.onLostDevice();
 	Game::releaseAll();
 	return;
 }
@@ -118,8 +114,8 @@ void CircleLife::releaseAll()
 void CircleLife::resetAll()
 {
 	backgroundTexture.onResetDevice();
-	planetTexture.onResetDevice();
 	circleTexture.onResetDevice();
+	obstacle1Texture.onResetDevice();
 	Game::resetAll();
 	return;
 }

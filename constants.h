@@ -22,7 +22,6 @@
 //Constants
 // graphic images
 const char background_IMAGE[] = "pictures\\background1.png";  // photo source courtesy of osu
-const char PLANET_IMAGE[] = "pictures\\planet.png"; // picture of planet
 const char CIRCLE_IMAGE[] = "pictures\\circle.png";   // player character
 const char OBSTACLE1_IMAGE[] = "pictures\\obstacle1.png"; // obstacle 1
 
@@ -45,9 +44,6 @@ const float FRAME_RATE = 200.0f;					// the target frame rate (frames/sec)
 const float MIN_FRAME_RATE = 10.0f;					// the minimum frame rate
 const float MIN_FRAME_TIME = 1.0f / FRAME_RATE;		// minimum desired time for 1 frame
 const float MAX_FRAME_TIME = 1.0f / MIN_FRAME_RATE;	// maximum time used in calculations
-
-
-const float MASS_PLANET = 1.0e14f;
 
 
 const float ROTATION_RATE = 180.0f;             // degrees per second
