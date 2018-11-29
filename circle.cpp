@@ -16,4 +16,5 @@ Circle::Circle() : Entity()
 	startFrame = circleNS::START_FRAME;    // first frame of obstacle animation
 	endFrame = circleNS::END_FRAME;      // last frame of obstacle animation
 	setCurrentFrame(startFrame);
+	collisionType = entityNS::BOX;
 }

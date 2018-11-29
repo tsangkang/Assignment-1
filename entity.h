@@ -50,10 +50,6 @@ protected:
 								// Pre: &ent = Other entity
 								// Post: &collisionVector contains collision vector
 	virtual bool collideCircle(Entity &ent, VECTOR2 &collisionVector);
-	// Axis aligned box collision detection
-	// Pre: &ent = Other entity
-	// Post: &collisionVector contains collision vector
-	virtual bool collideBox(Entity &ent, VECTOR2 &collisionVector);
 	// Separating axis collision detection between boxes
 	// Pre: &ent = Other entity
 	// Post: &collisionVector contains collision vector
@@ -135,6 +131,18 @@ public:
 	// Set mass.
 	virtual void  setMass(float m) { mass = m; }
 
+	// Set edge.left
+	virtual void setEdgeLeft(int l) { edge.left = l; }
+
+	// Set edge.top
+	virtual void setEdgeTop(int t) { edge.top = t; }
+
+	// Set edge.right
+	virtual void setEdgeRight(int r) { edge.right = r; }
+
+	// Set edge.bottom
+	virtual void setEdgeBottom(int b) { edge.bottom = b; }
+
 	// Set gravitational constant. Default is 6.67428e-11
 	virtual void  setGravity(float g) { gravity = g; }
 
@@ -170,7 +178,7 @@ public:
 	// Does this entity collide with ent?
 	virtual bool collidesWith(Entity &ent, VECTOR2 &collisionVector);
 
-	// Damage this Entity with weapon.
+	// Damage this Entity with weapon. 
 	virtual void damage(int weapon);
 
 	// Entity bounces after collision with other Entity
@@ -178,6 +186,10 @@ public:
 
 	// Adds the gravitational force to the velocity vector of this entity
 	void gravityForce(Entity *other, float frameTime);
+
+	virtual bool collideBox(Entity &ent, VECTOR2 &collisionVector);
+
+	int PixelPerfectCollision(SpriteData circle, SpriteData obstacle);
 };
 
 #endif

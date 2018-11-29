@@ -446,3 +446,70 @@ void Entity::gravityForce(Entity *ent, float frameTime)
 	// Add gravity vector to moving velocity vector to change direction
 	velocity += gravityV;
 }
+
+int PixelPerfectCollision(SpriteData circle, SpriteData obstacle)
+{
+	RECT rect1;
+	rect1.left = (long)circle.x;
+	rect1.top = (long)circle.y;
+	rect1.right = (long)circle.x + circle.width;
+	rect1.bottom = (long)circle.y + circle.height;
+
+	RECT rect2;
+	rect2.left = (long)obstacle.x;
+	rect2.top = (long)obstacle.y;
+	rect2.right = (long)obstacle.x + obstacle.width;
+	rect2.bottom = (long)obstacle.y + obstacle.height;
+
+	RECT dest;
+	if (IntersectRect(&dest, &rect1, &rect2))
+	{
+		D3DLOCKED_RECT rectS1;
+		HRESULT hResult = circle.texture->LockRect(0, &rectS1, NULL, NULL);
+
+		if (FAILED(hResult))
+		{
+			MessageBox(0, "Failed", "Info", 0);
+			return 0;
+		}
+
+		D3DLOCKED_RECT rectS2;
+		hResult = obstacle.texture->LockRect(0, &rectS2, NULL, NULL);
+
+		if (FAILED(hResult))
+		{
+			MessageBox(0, "Failed", "Info", 0);
+			return 0;
+		}
+
+		D3DCOLOR* pixelsS1 = (D3DCOLOR*)rectS1.pBits;
+		D3DCOLOR* pixelsS2 = (D3DCOLOR*)rectS2.pBits;
+
+		for (int rx = dest.left; rx < dest.right; rx++)
+		{
+			for (int ry = dest.top; ry < dest.bottom; ry++)
+			{
+				int s1x = rx - circle.x;
+				int s1y = ry - circle.y;
+
+				int s2x = rx - obstacle.x;
+				int s2y = ry - obstacle.y;
+
+				BYTE a = (pixelsS1[s1y * 32 + s1x] & 0xFF000000) >> 24;
+				BYTE b = (pixelsS2[s2y * 32 + s2x] & 0xFF000000) >> 24;
+
+				if (a == 255 && b == 255)
+				{
+					circle.texture->UnlockRect(0);
+					circle.texture->UnlockRect(0);
+					return 1;
+				}
+			}
+		}
+
+		circle.texture->UnlockRect(0);
+		obstacle.texture->UnlockRect(0);
+		return 0;
+	}
+	return 0;
+};
