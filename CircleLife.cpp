@@ -39,6 +39,7 @@ void CircleLife::initialize(HWND hwnd)
 	//obstacle1
 	if (!obstacle1.initialize(this, obstaclesNS::WIDTH, obstaclesNS::HEIGHT, obstaclesNS::TEXTURE_COLS, &obstacle1Texture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle1"));
+	obstacle1.setFrames(obstaclesNS::START_FRAME, obstaclesNS::END_FRAME);
 
 	circle.setX(GAME_WIDTH - (GAME_WIDTH - circleNS::WIDTH));              // start top left
 	circle.setY(GAME_HEIGHT - (GAME_HEIGHT - circleNS::HEIGHT));
