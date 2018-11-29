@@ -37,14 +37,14 @@ void CircleLife::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing circle"));
 
 	//obstacle1
-	if (!obstacle1.initialize(this, obstaclesNS::WIDTH, obstaclesNS::HEIGHT, obstaclesNS::TEXTURE_COLS, &obstacle1Texture))
+	if (!obstacle1.initialize(this, obstaclesNS::WIDTH, obstaclesNS::HEIGHT, obstaclesNS::COLS, &obstacle1Texture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle1"));
 	obstacle1.setFrames(obstaclesNS::START_FRAME, obstaclesNS::END_FRAME);
 
 	circle.setX(GAME_WIDTH - (GAME_WIDTH - circleNS::WIDTH));              // start top left
 	circle.setY(GAME_HEIGHT - (GAME_HEIGHT - circleNS::HEIGHT));
 	obstacle1.setX(GAME_WIDTH - 200);
-	obstacle1.setY(GAME_WIDTH - 200);
+	obstacle1.setY(GAME_HEIGHT - 200);
 
 
 	return;

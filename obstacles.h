@@ -16,6 +16,7 @@ namespace obstaclesNS
 	const int   TEXTURE_COLS = 1;       // texture has 2 columns
 	const int   START_FRAME = 0;        // starts at frame 1
 	const int   END_FRAME = 0;          // no animation
+	const int COLS = 1;
 }
 
 class Obstacles : public Entity            // inherits from Entity class

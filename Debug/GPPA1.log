@@ -2,4 +2,9 @@
   CircleLife.cpp
 d:\year 3\sem 2\gameplay programming\assignment 1\circlelife.cpp(59): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
 d:\year 3\sem 2\gameplay programming\assignment 1\circlelife.cpp(65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  Compiling...
+  winmain.cpp
+  obstacles.cpp
+  Generating Code...
   GPPA1.vcxproj -> D:\Year 3\Sem 2\Gameplay Programming\Assignment 1\Debug\GPPA1.exe
