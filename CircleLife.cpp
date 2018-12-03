@@ -35,26 +35,28 @@ void CircleLife::initialize(HWND hwnd)
 	//circle
 	if (!circle.initialize(this, circleNS::WIDTH, circleNS::HEIGHT, circleNS::COLS, &circleTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing circle"));
-
-	//obstacle1
-	if (!obstacle1.initialize(this, obstaclesNS::WIDTH, obstaclesNS::HEIGHT, obstaclesNS::TEXTURE_COLS, &obstacle1Texture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle1"));
-	obstacle1.setFrames(obstaclesNS::START_FRAME, obstaclesNS::END_FRAME);
-
 	circle.setX(GAME_WIDTH - (GAME_WIDTH - circleNS::WIDTH));              // start top left
 	circle.setY(GAME_HEIGHT - (GAME_HEIGHT - circleNS::HEIGHT));
 	circle.setEdgeBottom(16);
 	circle.setEdgeLeft(16);
 	circle.setEdgeRight(16);
 	circle.setEdgeTop(16);
+
+	//obstacle1
+	if (!obstacle1.initialize(this, obstaclesNS::WIDTH, obstaclesNS::HEIGHT, obstaclesNS::TEXTURE_COLS, &obstacle1Texture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle1"));
+	obstacle1.setFrames(obstaclesNS::START_FRAME, obstaclesNS::END_FRAME);
 	obstacle1.setX(GAME_WIDTH - 200);
 	obstacle1.setY(GAME_HEIGHT - 200);
-	obstacle1.setEdgeLeft(64);
-	obstacle1.setEdgeBottom(64);
-	obstacle1.setEdgeRight(64);
-	obstacle1.setEdgeTop(64);
+	obstacle1.setEdgeLeft(69);
+	obstacle1.setEdgeBottom(69);
+	obstacle1.setEdgeRight(69);
+	obstacle1.setEdgeTop(69);
+	obstacle1.setVelocity(VECTOR2(obstaclesNS::SPEED, -obstaclesNS::SPEED));
 
-	return;
+	
+	
+	
 }
 // Update all game items
 void CircleLife::update()
@@ -69,7 +71,7 @@ void CircleLife::update()
 	{
 		circle.setX(circle.getX() - frameTime * CIRCLE_SPEED);
 		if ((circle.getX() - circleNS::WIDTH) < -circle.getWidth())         // stops at the left edge
-			circle.setX(circle.getWidth()- circleNS::WIDTH);      // prevents from moving over the edge
+			circle.setX(circle.getWidth() - circleNS::WIDTH);      // prevents from moving over the edge
 	}
 	if (input->isKeyDown(CIRCLE_UP_KEY))               // if move up
 	{
@@ -81,10 +83,17 @@ void CircleLife::update()
 	{
 		circle.setY(circle.getY() + frameTime * CIRCLE_SPEED);
 		if ((circle.getY() + circleNS::HEIGHT) > GAME_HEIGHT)              // if off screen bottom
-			circle.setY(GAME_HEIGHT- circleNS::HEIGHT);    // position off screen top
+			circle.setY(GAME_HEIGHT - circleNS::HEIGHT);    // position off screen top
 	}
 	circle.update(frameTime);
 	obstacle1.update(frameTime);
+
+	if (GetAsyncKeyState(VK_ESCAPE) != 0)
+	{
+		exitGame();
+	}
+	else
+		return;
 }
 
 // Artificial Intelligence
@@ -96,9 +105,13 @@ void CircleLife::ai()
 void CircleLife::collisions()
 {
 	VECTOR2 collisionVector;
-	if (circle.collideBox(obstacle1, collisionVector) == true)
+	if (circle.collidesWith(obstacle1, collisionVector))
 	{
-		//circle.PixelPerfectCollision(circle.getSpriteDataRect, obstacle1.getSpriteDataRect);
+		exitGame();
+		//if (obstacle1.PixelPerfectCollision(obstacle1.setSpriteDataRect, circle.setSpriteDataRect) == 1)
+		//	exitGame;
+		//else
+		//	return;
 	}
 }
 // Render game items

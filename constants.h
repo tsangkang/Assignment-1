@@ -56,4 +56,6 @@ const UCHAR CIRCLE_LEFT_KEY = VK_LEFT;
 const UCHAR CIRCLE_DOWN_KEY = VK_DOWN;
 const UCHAR CIRCLE_UP_KEY = VK_UP;
 
+
+const UCHAR ESC_KEY = VK_ESCAPE;       // escape key
 #endif
