@@ -55,7 +55,7 @@ void CircleLife::initialize(HWND hwnd)
 	if (!obstacle1.initialize(this, obstaclesNS::WIDTH, obstaclesNS::HEIGHT, obstaclesNS::TEXTURE_COLS, &obstacle1Texture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle1"));
 	obstacle1.setFrames(obstaclesNS::START_FRAME, obstaclesNS::END_FRAME);
-	obstacle1.setX(GAME_WIDTH - 200);
+	obstacle1.setX(GAME_WIDTH);
 	obstacle1.setY(GAME_HEIGHT - 200);
 	obstacle1.setEdgeLeft(69);
 	obstacle1.setEdgeBottom(69);
@@ -68,7 +68,7 @@ void CircleLife::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle2"));
 	obstacle2.setFrames(obstaclesNS::START_FRAME, obstaclesNS::END_FRAME);
 	obstacle2.setX(GAME_WIDTH - 500);
-	obstacle2.setY(GAME_HEIGHT - 500);
+	obstacle2.setY(0);
 	obstacle2.setEdgeLeft(69);
 	obstacle2.setEdgeBottom(69);
 	obstacle2.setEdgeRight(69);
@@ -79,8 +79,8 @@ void CircleLife::initialize(HWND hwnd)
 	if (!obstacle3.initialize(this, obstaclesNS::WIDTH, obstaclesNS::HEIGHT, obstaclesNS::TEXTURE_COLS, &obstacle3Texture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle3"));
 	obstacle3.setFrames(obstaclesNS::START_FRAME, obstaclesNS::END_FRAME);
-	obstacle3.setX(GAME_WIDTH - 300);
-	obstacle3.setY(GAME_HEIGHT - 300);
+	obstacle3.setX(0);
+	obstacle3.setY(GAME_HEIGHT/3);
 	obstacle3.setEdgeLeft(69);
 	obstacle3.setEdgeBottom(69);
 	obstacle3.setEdgeRight(69);
@@ -91,8 +91,8 @@ void CircleLife::initialize(HWND hwnd)
 	if (!obstacle4.initialize(this, obstaclesNS::WIDTH, obstaclesNS::HEIGHT, obstaclesNS::TEXTURE_COLS, &obstacle4Texture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle4"));
 	obstacle4.setFrames(obstaclesNS::START_FRAME, obstaclesNS::END_FRAME);
-	obstacle4.setX(GAME_WIDTH - 400);
-	obstacle4.setY(GAME_HEIGHT - 400);
+	obstacle4.setX(GAME_WIDTH/3);
+	obstacle4.setY(GAME_HEIGHT);
 	obstacle4.setEdgeLeft(69);
 	obstacle4.setEdgeBottom(69);
 	obstacle4.setEdgeRight(69);
@@ -128,10 +128,10 @@ void CircleLife::update()
 			circle.setY(GAME_HEIGHT - circleNS::HEIGHT);    // position off screen top
 	}
 	circle.update(frameTime);
-	obstacle1.update(frameTime);
-	obstacle2.update(frameTime);
-	obstacle3.update(frameTime);
-	obstacle4.update(frameTime);
+	obstacle1.updateLeftRight(frameTime);
+	obstacle2.updateTopDown(frameTime);
+	obstacle3.updateLeftRight(frameTime);
+	obstacle4.updateTopDown(frameTime);
 
 	if (GetAsyncKeyState(VK_ESCAPE) != 0)
 	{
@@ -150,7 +150,8 @@ void CircleLife::ai()
 void CircleLife::collisions()
 {
 	VECTOR2 collisionVector;
-	if (circle.collidesWith(obstacle1, collisionVector))
+	if (circle.collidesWith(obstacle1, collisionVector) == true || circle.collidesWith(obstacle3, collisionVector) == true 
+		|| circle.collidesWith(obstacle3, collisionVector) == true || circle.collidesWith(obstacle4, collisionVector) == true)
 	{
 		exitGame();
 		//if (obstacle1.PixelPerfectCollision(obstacle1.setSpriteDataRect, circle.setSpriteDataRect) == 1)

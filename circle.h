@@ -12,7 +12,7 @@ namespace circleNS
 	const int   COLLISION_RADIUS = 120 / 2;   // for circular collision
 	const int   X = GAME_WIDTH / 2 - circleNS::WIDTH / 2; // location on screen
 	const int   Y = GAME_HEIGHT / 2 - circleNS::HEIGHT / 2;
-	const float MASS = 0;         // mass
+	const float MASS = 500;         // mass
 	const int   TEXTURE_COLS = 1;       // texture has 1 columns
 	const int   START_FRAME = 0;        // starts at frame 1
 	const int   END_FRAME = 0;          // no animation
@@ -21,9 +21,15 @@ namespace circleNS
 
 class Circle : public Entity            // inherits from Entity class
 {
+private:
+	Image circle;
 public:
 	// constructor
 	Circle();
+
+	virtual void draw();
+	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,
+		TextureManager *textureM);
 };
 #endif
 

@@ -22,11 +22,10 @@ Obstacles::Obstacles() : Entity()
 	collisionType = entityNS::BOX;
 }
 
-void Obstacles::update(float frameTime)
+void Obstacles::updateLeftRight(float frameTime)
 {
 	Entity::update(frameTime);
 	spriteData.x += frameTime * velocity.x;         // move obstacle along X 
-	//spriteData.y += frameTime * velocity.y;         // move obstacle along Y
 
 	
 													// Bounce off walls
@@ -40,6 +39,17 @@ void Obstacles::update(float frameTime)
 		spriteData.x = 0;                           // position at left screen edge
 		velocity.x = -velocity.x;                   // reverse X direction
 	}
+}
+
+
+void Obstacles::updateTopDown(float frameTime)
+{
+	Entity::update(frameTime);
+	spriteData.y += frameTime * velocity.y;         // move obstacle along Y
+													//spriteData.y += frameTime * velocity.y;         // move obstacle along Y
+
+
+													// Bounce off walls
 	if (spriteData.y > GAME_HEIGHT - obstaclesNS::HEIGHT)  // if hit bottom screen edge
 	{
 		spriteData.y = GAME_HEIGHT - obstaclesNS::HEIGHT;  // position at bottom screen edge
@@ -50,4 +60,18 @@ void Obstacles::update(float frameTime)
 		spriteData.y = 0;                           // position at top screen edge
 		velocity.y = -velocity.y;                   // reverse Y direction
 	}
+}
+
+void Obstacles::draw()
+{
+	Image::draw();              // draw circle
+}
+
+bool Obstacles::initialize(Game *gamePtr, int width, int height, int ncols,
+	TextureManager *textureM)
+{
+	obstacle.initialize(gamePtr->getGraphics(), width, height, ncols, textureM);
+	obstacle.setFrames(obstaclesNS::START_FRAME, obstaclesNS::END_FRAME);
+	obstacle.setCurrentFrame(obstaclesNS::START_FRAME);
+	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }

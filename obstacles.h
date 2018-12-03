@@ -21,10 +21,17 @@ namespace obstaclesNS
 
 class Obstacles : public Entity            // inherits from Entity class
 {
+private:
+	Image obstacle;
 public:
 	// constructor
 	Obstacles();
-	void update(float frameTime);
+
+	virtual void draw();
+	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,
+		TextureManager *textureM);
+	void updateLeftRight(float frameTime);
+	void updateTopDown(float frameTime);
 };
 #endif
 
