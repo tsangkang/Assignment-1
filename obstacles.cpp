@@ -26,7 +26,7 @@ void Obstacles::update(float frameTime)
 {
 	Entity::update(frameTime);
 	spriteData.x += frameTime * velocity.x;         // move obstacle along X 
-	spriteData.y += frameTime * velocity.y;         // move obstacle along Y
+	//spriteData.y += frameTime * velocity.y;         // move obstacle along Y
 
 	
 													// Bounce off walls

@@ -27,6 +27,15 @@ void CircleLife::initialize(HWND hwnd)
 	if (!obstacle1Texture.initialize(graphics, OBSTACLE1_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle1 texture"));
 
+	if (!obstacle2Texture.initialize(graphics, OBSTACLE2_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle2 texture"));
+
+	if (!obstacle3Texture.initialize(graphics, OBSTACLE3_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle3 texture"));
+
+	if (!obstacle4Texture.initialize(graphics, OBSTACLE4_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle4 texture"));
+
 
 	// background
 	if (!background.initialize(graphics, 0, 0, 0, &backgroundTexture))
@@ -54,8 +63,41 @@ void CircleLife::initialize(HWND hwnd)
 	obstacle1.setEdgeTop(69);
 	obstacle1.setVelocity(VECTOR2(obstaclesNS::SPEED, -obstaclesNS::SPEED));
 
+	//obstacle2
+	if (!obstacle2.initialize(this, obstaclesNS::WIDTH, obstaclesNS::HEIGHT, obstaclesNS::TEXTURE_COLS, &obstacle2Texture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle2"));
+	obstacle2.setFrames(obstaclesNS::START_FRAME, obstaclesNS::END_FRAME);
+	obstacle2.setX(GAME_WIDTH - 500);
+	obstacle2.setY(GAME_HEIGHT - 500);
+	obstacle2.setEdgeLeft(69);
+	obstacle2.setEdgeBottom(69);
+	obstacle2.setEdgeRight(69);
+	obstacle2.setEdgeTop(69);
+	obstacle2.setVelocity(VECTOR2(obstaclesNS::SPEED, -obstaclesNS::SPEED));
 	
+	//obstacle3
+	if (!obstacle3.initialize(this, obstaclesNS::WIDTH, obstaclesNS::HEIGHT, obstaclesNS::TEXTURE_COLS, &obstacle3Texture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle3"));
+	obstacle3.setFrames(obstaclesNS::START_FRAME, obstaclesNS::END_FRAME);
+	obstacle3.setX(GAME_WIDTH - 300);
+	obstacle3.setY(GAME_HEIGHT - 300);
+	obstacle3.setEdgeLeft(69);
+	obstacle3.setEdgeBottom(69);
+	obstacle3.setEdgeRight(69);
+	obstacle3.setEdgeTop(69);
+	obstacle3.setVelocity(VECTOR2(obstaclesNS::SPEED, -obstaclesNS::SPEED));
 	
+	//obstacle4
+	if (!obstacle4.initialize(this, obstaclesNS::WIDTH, obstaclesNS::HEIGHT, obstaclesNS::TEXTURE_COLS, &obstacle4Texture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle4"));
+	obstacle4.setFrames(obstaclesNS::START_FRAME, obstaclesNS::END_FRAME);
+	obstacle4.setX(GAME_WIDTH - 400);
+	obstacle4.setY(GAME_HEIGHT - 400);
+	obstacle4.setEdgeLeft(69);
+	obstacle4.setEdgeBottom(69);
+	obstacle4.setEdgeRight(69);
+	obstacle4.setEdgeTop(69);
+	obstacle4.setVelocity(VECTOR2(obstaclesNS::SPEED, -obstaclesNS::SPEED));
 	
 }
 // Update all game items
@@ -87,6 +129,9 @@ void CircleLife::update()
 	}
 	circle.update(frameTime);
 	obstacle1.update(frameTime);
+	obstacle2.update(frameTime);
+	obstacle3.update(frameTime);
+	obstacle4.update(frameTime);
 
 	if (GetAsyncKeyState(VK_ESCAPE) != 0)
 	{
@@ -122,6 +167,9 @@ void CircleLife::render()
 	background.draw();                      // add the orion background to the scene
 	circle.draw();
 	obstacle1.draw();
+	obstacle2.draw();
+	obstacle3.draw();
+	obstacle4.draw();
 	graphics->spriteEnd();                  // end drawing sprites
 }
 // The graphics device was lost.
@@ -131,6 +179,9 @@ void CircleLife::releaseAll()
 	backgroundTexture.onLostDevice();
 	circleTexture.onLostDevice();
 	obstacle1Texture.onLostDevice();
+	obstacle2Texture.onLostDevice();
+	obstacle3Texture.onLostDevice();
+	obstacle4Texture.onLostDevice();
 	Game::releaseAll();
 	return;
 }
@@ -141,6 +192,9 @@ void CircleLife::resetAll()
 	backgroundTexture.onResetDevice();
 	circleTexture.onResetDevice();
 	obstacle1Texture.onResetDevice();
+	obstacle2Texture.onResetDevice();
+	obstacle3Texture.onResetDevice();
+	obstacle4Texture.onResetDevice();
 	Game::resetAll();
 	return;
 }

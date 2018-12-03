@@ -20,9 +20,15 @@ private:
 	TextureManager backgroundTexture;   // background texture
 	TextureManager circleTexture;     // circle texture
 	TextureManager obstacle1Texture;
+	TextureManager obstacle2Texture;
+	TextureManager obstacle3Texture;
+	TextureManager obstacle4Texture;
 	Image   background;                 // background image
 	Circle   circle;                   // circle image
 	Obstacles obstacle1;
+	Obstacles obstacle2;
+	Obstacles obstacle3;
+	Obstacles obstacle4;
 
 public:
 	// Constructor

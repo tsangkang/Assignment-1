@@ -24,6 +24,9 @@
 const char background_IMAGE[] = "pictures\\background1.png";  // photo source courtesy of osu
 const char CIRCLE_IMAGE[] = "pictures\\circle.png";   // player character
 const char OBSTACLE1_IMAGE[] = "pictures\\obstacle1.png"; // obstacle 1
+const char OBSTACLE2_IMAGE[] = "pictures\\obstacle1.png"; // obstacle 2
+const char OBSTACLE3_IMAGE[] = "pictures\\obstacle1.png"; // obstacle 3
+const char OBSTACLE4_IMAGE[] = "pictures\\obstacle1.png"; // obstacle 4
 
 												  // window
 const char CLASS_NAME[] = "CircleLife";
