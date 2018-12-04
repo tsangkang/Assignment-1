@@ -7,7 +7,7 @@
 #include "image.h"
 #include "circle.h"
 #include "obstacles.h"
-
+#include "TextDX.h"
 
 // class declaration to be inserted here
 
@@ -29,6 +29,7 @@ private:
 	Obstacles obstacle2;
 	Obstacles obstacle3;
 	Obstacles obstacle4;
+	TextDX *deadText;
 
 public:
 	// Constructor
@@ -51,5 +52,4 @@ public:
 	void CircleLife::releaseAll();
 
 	void CircleLife::resetAll();
-
 };

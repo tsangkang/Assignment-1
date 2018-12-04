@@ -23,6 +23,8 @@ class Obstacles : public Entity            // inherits from Entity class
 {
 private:
 	Image obstacle;
+	bool isCollided = false;
+
 public:
 	// constructor
 	Obstacles();

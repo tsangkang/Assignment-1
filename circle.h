@@ -26,7 +26,6 @@ private:
 public:
 	// constructor
 	Circle();
-
 	virtual void draw();
 	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,
 		TextureManager *textureM);

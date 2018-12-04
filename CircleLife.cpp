@@ -16,7 +16,7 @@ CircleLife::~CircleLife()
 void CircleLife::initialize(HWND hwnd)
 {
 	Game::initialize(hwnd); // throws GameError
-
+	Game::timeStart;
 							// all the textures
 	if (!backgroundTexture.initialize(graphics, background_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background texture"));
@@ -98,7 +98,6 @@ void CircleLife::initialize(HWND hwnd)
 	obstacle4.setEdgeRight(69);
 	obstacle4.setEdgeTop(69);
 	obstacle4.setVelocity(VECTOR2(obstaclesNS::SPEED, -obstaclesNS::SPEED));
-	
 }
 // Update all game items
 void CircleLife::update()
@@ -150,14 +149,14 @@ void CircleLife::ai()
 void CircleLife::collisions()
 {
 	VECTOR2 collisionVector;
-	if (circle.collidesWith(obstacle1, collisionVector) == true || circle.collidesWith(obstacle3, collisionVector) == true 
-		|| circle.collidesWith(obstacle3, collisionVector) == true || circle.collidesWith(obstacle4, collisionVector) == true)
+	if (circle.collidesWith(obstacle1, collisionVector) || circle.collidesWith(obstacle3, collisionVector)  
+		|| circle.collidesWith(obstacle3, collisionVector) || circle.collidesWith(obstacle4, collisionVector))
 	{
 		exitGame();
-		//if (obstacle1.PixelPerfectCollision(obstacle1.setSpriteDataRect, circle.setSpriteDataRect) == 1)
-		//	exitGame;
-		//else
-		//	return;
+		/*if (obstacle1.PixelPerfectCollision(obstacle1.getSpriteDataRect, circle.getSpriteDataRect) == 1)
+			exitGame();
+		else
+			return;*/
 	}
 }
 // Render game items

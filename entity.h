@@ -189,6 +189,7 @@ public:
 
 	virtual bool collideBox(Entity &ent, VECTOR2 &collisionVector);
 
+
 	int PixelPerfectCollision(SpriteData circle, SpriteData obstacle);
 };
 

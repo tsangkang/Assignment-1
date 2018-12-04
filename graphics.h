@@ -17,6 +17,7 @@
 #define LP_3D       LPDIRECT3D9
 #define LP_SPRITE   LPD3DXSPRITE
 #define VECTOR2     D3DXVECTOR2
+#define LP_DXFONT	LPD3DXFONT
 
 // Color defines
 #define COLOR_ARGB DWORD
@@ -162,14 +163,15 @@ public:
 	// Draw the sprite described in SpriteData structure.
 
 
-    //=============================================================================
+	//=============================================================================
 	// Sprite Begin
-    //=============================================================================
+	//=============================================================================
+
+	LP_SPRITE   getSprite() { return sprite; }
 	void spriteBegin()
 	{
 		sprite->Begin(D3DXSPRITE_ALPHABLEND);
 	}
-
 	//=============================================================================
 	// Sprite End
 	//=============================================================================
