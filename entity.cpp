@@ -1,3 +1,5 @@
+//Work of Benedict Yee JianHui (S10173071G) and Tsang Hong Kang (S10172695F)
+
 // Programming 2D Games
 // Copyright (c) 2011 by: 
 // Charles Kelly

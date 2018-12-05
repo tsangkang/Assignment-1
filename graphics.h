@@ -1,3 +1,5 @@
+//Work of Benedict Yee JianHui (S10173071G) and Tsang Hong Kang (S10172695F)
+
 #pragma once
 #ifndef _GRAPHICS_H             // prevent multiple definitions if this 
 #define _GRAPHICS_H             // ..file is included in more than one place

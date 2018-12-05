@@ -1,3 +1,5 @@
+//Work of Benedict Yee JianHui (S10173071G) and Tsang Hong Kang (S10172695F)
+
 #include "obstacles.h"
 #include <ctime>
 //=============================================================================
@@ -21,7 +23,7 @@ Obstacles::Obstacles() : Entity()
 	endFrame = obstaclesNS::END_FRAME;      // last frame of obstacle animation
 	radius = obstaclesNS::COLLISION_RADIUS;
 	setCurrentFrame(startFrame);
-	collisionType = entityNS::BOX;
+	collisionType = entityNS::CIRCLE;
 	center = VECTOR2((spriteData.x + obstaclesNS::WIDTH / 2)* spriteData.scale, (spriteData.y + obstaclesNS::HEIGHT / 2)* spriteData.scale);
 }
 

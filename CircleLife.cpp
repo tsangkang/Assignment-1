@@ -1,3 +1,5 @@
+//Work of Benedict Yee JianHui (S10173071G) and Tsang Hong Kang (S10172695F)
+
 #include "CircleLife.h"
 #include <string>
 #include <ctime>
@@ -215,10 +217,9 @@ void CircleLife::ai()
 void CircleLife::collisions()
 {
 	VECTOR2 collisionVector;
-	if (circle.collidesWith(obstacle1, collisionVector))
-		/*|| circle.collidesWith(obstacle2, collisionVector)  
+	if ((circle.collidesWith(obstacle1, collisionVector)) || (circle.collidesWith(obstacle2, collisionVector)) 
 		|| circle.collidesWith(obstacle3, collisionVector) || circle.collidesWith(obstacle4, collisionVector) || circle.collidesWith(obstacle5, collisionVector))
-	*/
+	
 	{
 		//if (obstacle1.PixelPerfectCollision(obstacle1.getSpriteDataRect, circle.getSpriteDataRect) == 1)
 			exitGame();

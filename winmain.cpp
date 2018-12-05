@@ -1,3 +1,5 @@
+//Work of Benedict Yee JianHui (S10173071G) and Tsang Hong Kang (S10172695F)
+
 #define _CRTDBG_MAP_ALLOC		// for detecting memory leaks
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>

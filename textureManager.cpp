@@ -1,3 +1,5 @@
+//Work of Benedict Yee JianHui (S10173071G) and Tsang Hong Kang (S10172695F)
+
 #include "textureManager.h"
 #define _TEXTUREMANAGER_H       // file is included in more than one place
 

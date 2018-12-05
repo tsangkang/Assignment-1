@@ -1,3 +1,5 @@
+//Work of Benedict Yee JianHui (S10173071G) and Tsang Hong Kang (S10172695F)
+
 #ifndef _CIRCLE_H               // Prevent multiple definitions if this 
 #define _CIRCLE_H               // file is included in more than one place
 #define WIN32_LEAN_AND_MEAN
