@@ -4,6 +4,9 @@
 // Constructor
 CircleLife::CircleLife()
 {
+	gameOverText = new TextDX();
+	isGameOver = false;
+	health = 1;
 }
 
 // Destructor
@@ -98,6 +101,10 @@ void CircleLife::initialize(HWND hwnd)
 	obstacle4.setEdgeRight(69);
 	obstacle4.setEdgeTop(69);
 	obstacle4.setVelocity(VECTOR2(obstaclesNS::SPEED, -obstaclesNS::SPEED));
+
+	//game over text
+	if (gameOverText->initialize(graphics, 30, true, false, "Arial") == false)
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing pausedText font"));
 }
 // Update all game items
 void CircleLife::update()
@@ -130,7 +137,7 @@ void CircleLife::update()
 	obstacle1.updateLeftRight(frameTime);
 	obstacle2.updateTopDown(frameTime);
 	obstacle3.updateLeftRight(frameTime);
-	obstacle4.updateTopDown(frameTime);
+	obstacle4.updateRandomWidth(frameTime);
 
 	if (GetAsyncKeyState(VK_ESCAPE) != 0)
 	{
@@ -138,6 +145,16 @@ void CircleLife::update()
 	}
 	else
 		return;
+
+	if (health <= 0)
+	{
+		isGameOver == true;
+	}
+	else
+	{
+		health = health - 1;
+		isGameOver == false;
+	}
 }
 
 // Artificial Intelligence
@@ -152,7 +169,6 @@ void CircleLife::collisions()
 	if (circle.collidesWith(obstacle1, collisionVector) || circle.collidesWith(obstacle2, collisionVector)  
 		|| circle.collidesWith(obstacle3, collisionVector) || circle.collidesWith(obstacle4, collisionVector))
 	{
-		exitGame();
 		/*if (obstacle1.PixelPerfectCollision(obstacle1.getSpriteDataRect, circle.getSpriteDataRect) == 1)
 			exitGame();
 		else
@@ -170,6 +186,11 @@ void CircleLife::render()
 	obstacle2.draw();
 	obstacle3.draw();
 	obstacle4.draw();
+	if (isGameOver)
+	{
+		gameOverText->setFontColor(graphicsNS::RED);
+		gameOverText->print("Game Over. Press Esc to exit!", GAME_WIDTH / 2, GAME_HEIGHT / 2);
+	}
 	graphics->spriteEnd();                  // end drawing sprites
 }
 // The graphics device was lost.
@@ -197,4 +218,9 @@ void CircleLife::resetAll()
 	obstacle4Texture.onResetDevice();
 	Game::resetAll();
 	return;
+}
+
+bool CircleLife::checkisGameOver() 
+{
+	return isGameOver;
 }

@@ -29,7 +29,9 @@ private:
 	Obstacles obstacle2;
 	Obstacles obstacle3;
 	Obstacles obstacle4;
-	TextDX *deadText;
+	TextDX *gameOverText;
+	bool isGameOver;
+	int health;
 
 public:
 	// Constructor
@@ -52,4 +54,6 @@ public:
 	void CircleLife::releaseAll();
 
 	void CircleLife::resetAll();
+
+	bool CircleLife::checkisGameOver();
 };

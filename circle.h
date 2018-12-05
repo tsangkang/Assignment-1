@@ -23,12 +23,17 @@ class Circle : public Entity            // inherits from Entity class
 {
 private:
 	Image circle;
+	float circleHP;
 public:
 	// constructor
 	Circle();
 	virtual void draw();
 	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,
 		TextureManager *textureM);
+	float getcircleHP() 
+	{
+		return circleHP;
+	}
 };
 #endif
 

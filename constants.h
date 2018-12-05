@@ -21,7 +21,7 @@
 
 //Constants
 // graphic images
-const char background_IMAGE[] = "pictures\\background1.png";  // photo source courtesy of osu
+const char background_IMAGE[] = "pictures\\background3.png";  // photo source courtesy of pexel
 const char CIRCLE_IMAGE[] = "pictures\\circle.png";   // player character
 const char OBSTACLE1_IMAGE[] = "pictures\\obstacle1.png"; // obstacle 1
 const char OBSTACLE2_IMAGE[] = "pictures\\obstacle1.png"; // obstacle 2

@@ -5,7 +5,7 @@
 //=============================================================================
 TextDX::TextDX()
 {
-	color = SETCOLOR_ARGB(255, 255, 255, 255); // default to white font
+	color = SETCOLOR_ARGB(0, 255, 255, 255); // default to white font
 
 											   // set font position
 	fontRect.top = 0;

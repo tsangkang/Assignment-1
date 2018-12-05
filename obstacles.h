@@ -34,6 +34,7 @@ public:
 		TextureManager *textureM);
 	void updateLeftRight(float frameTime);
 	void updateTopDown(float frameTime);
+	void updateRandomWidth(float frameTime);
 };
 #endif
 

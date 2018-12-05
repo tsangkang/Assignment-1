@@ -1,5 +1,5 @@
 #include "obstacles.h"
-
+#include <ctime>
 //=============================================================================
 // default constructor
 //=============================================================================
@@ -19,7 +19,7 @@ Obstacles::Obstacles() : Entity()
 	endFrame = obstaclesNS::END_FRAME;      // last frame of obstacle animation
 	radius = obstaclesNS::COLLISION_RADIUS;
 	setCurrentFrame(startFrame);
-	collisionType = entityNS::CIRCLE;
+	collisionType = entityNS::BOX;
 }
 
 void Obstacles::updateLeftRight(float frameTime)
@@ -62,6 +62,16 @@ void Obstacles::updateTopDown(float frameTime)
 	}
 }
 
+void Obstacles::updateRandomWidth(float frameTime)
+{
+	int random = rand();
+	srand(time(NULL));
+	spriteData.y += frameTime * velocity.y; //move top to down
+
+	spriteData.x = rand() % 100;
+	spriteData.y = 0;
+}
+
 void Obstacles::draw()
 {
 	Image::draw();              // draw circle
@@ -75,3 +85,4 @@ bool Obstacles::initialize(Game *gamePtr, int width, int height, int ncols,
 	obstacle.setCurrentFrame(obstaclesNS::START_FRAME);
 	return(Entity::initialize(gamePtr, width, height, ncols, textureM));
 }
+
