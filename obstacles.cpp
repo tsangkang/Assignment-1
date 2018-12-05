@@ -17,9 +17,9 @@ Obstacles::Obstacles() : Entity()
 	velocity.y = 0;                             // velocity Y
 	startFrame = obstaclesNS::START_FRAME;    // first frame of obstacle animation
 	endFrame = obstaclesNS::END_FRAME;      // last frame of obstacle animation
-	radius = obstaclesNS::WIDTH;
+	radius = obstaclesNS::COLLISION_RADIUS;
 	setCurrentFrame(startFrame);
-	collisionType = entityNS::BOX;
+	collisionType = entityNS::CIRCLE;
 }
 
 void Obstacles::updateLeftRight(float frameTime)

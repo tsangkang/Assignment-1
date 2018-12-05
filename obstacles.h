@@ -7,8 +7,8 @@
 
 namespace obstaclesNS
 {
-	const int   WIDTH = 69;                // image width
-	const int   HEIGHT = 69;               // image height
+	const int   WIDTH = 128;                // image width
+	const int   HEIGHT = 128;               // image height
 	const int   COLLISION_RADIUS = 120/2;   // for circular collision
 	const float SPEED = 200;                // 100 pixels per second
 	const int   X = GAME_WIDTH / 2 - WIDTH / 2; // location on screen

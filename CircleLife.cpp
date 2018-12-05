@@ -149,7 +149,7 @@ void CircleLife::ai()
 void CircleLife::collisions()
 {
 	VECTOR2 collisionVector;
-	if (circle.collidesWith(obstacle1, collisionVector) || circle.collidesWith(obstacle3, collisionVector)  
+	if (circle.collidesWith(obstacle1, collisionVector) || circle.collidesWith(obstacle2, collisionVector)  
 		|| circle.collidesWith(obstacle3, collisionVector) || circle.collidesWith(obstacle4, collisionVector))
 	{
 		exitGame();
