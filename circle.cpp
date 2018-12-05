@@ -17,6 +17,7 @@ Circle::Circle() : Entity()
 	endFrame = circleNS::END_FRAME;      // last frame of obstacle animation
 	setCurrentFrame(startFrame);
 	collisionType = entityNS::CIRCLE;
+	center = VECTOR2((spriteData.x + circleNS::WIDTH / 2) * spriteData.scale, (spriteData.y + circleNS::HEIGHT / 2) * spriteData.scale);
 }
 
 bool Circle::initialize(Game *gamePtr, int width, int height, int ncols,

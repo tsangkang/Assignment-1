@@ -22,7 +22,7 @@ Entity::Entity() : Image()
 	deltaV.y = 0.0;
 	active = true;                  // the entity is active
 	rotatedBoxReady = false;
-	collisionType = entityNS::CIRCLE;
+	collisionType;
 	health = 3;
 	gravity = entityNS::GRAVITY;
 }

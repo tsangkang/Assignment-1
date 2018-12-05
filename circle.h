@@ -9,7 +9,7 @@ namespace circleNS
 {
 	const int   WIDTH = 32;                // image width
 	const int   HEIGHT = 32;               // image height
-	const int   COLLISION_RADIUS = 1;   // for circular collision
+	const int   COLLISION_RADIUS = circleNS::WIDTH/2;   // for circular collision
 	const int   X = GAME_WIDTH / 2 - circleNS::WIDTH / 2; // location on screen
 	const int   Y = GAME_HEIGHT / 2 - circleNS::HEIGHT / 2;
 	const float MASS = 500;         // mass

@@ -9,9 +9,11 @@ Obstacles::Obstacles() : Entity()
 	spriteData.height = obstaclesNS::HEIGHT;
 	spriteData.x = obstaclesNS::X;              // location on screen
 	spriteData.y = obstaclesNS::Y;
-	spriteData.rect.bottom = obstaclesNS::HEIGHT;
-	spriteData.rect.right = obstaclesNS::WIDTH;
-	radius = obstaclesNS::COLLISION_RADIUS;
+	spriteData.rect.bottom = obstaclesNS::HEIGHT/2*spriteData.scale;
+	spriteData.rect.right = obstaclesNS::WIDTH/2 * spriteData.scale;
+	spriteData.rect.top = -(obstaclesNS::HEIGHT / 2 * spriteData.scale);
+	spriteData.rect.left = -(obstaclesNS::WIDTH / 2 * spriteData.scale);
+	radius = obstaclesNS::WIDTH/2;
 	mass = obstaclesNS::MASS;
 	velocity.x = 0;                             // velocity X
 	velocity.y = 0;                             // velocity Y
@@ -20,6 +22,7 @@ Obstacles::Obstacles() : Entity()
 	radius = obstaclesNS::COLLISION_RADIUS;
 	setCurrentFrame(startFrame);
 	collisionType = entityNS::BOX;
+	center = VECTOR2((spriteData.x + obstaclesNS::WIDTH / 2)* spriteData.scale, (spriteData.y + obstaclesNS::HEIGHT / 2)* spriteData.scale);
 }
 
 void Obstacles::updateLeftRight(float frameTime)
@@ -62,14 +65,10 @@ void Obstacles::updateTopDown(float frameTime)
 	}
 }
 
-void Obstacles::updateRandomWidth(float frameTime)
+void Obstacles::updateRandomObstacles(float frameTime)
 {
-	int random = rand();
-	srand(time(NULL));
-	spriteData.y += frameTime * velocity.y; //move top to down
-
-	spriteData.x = rand() % 100;
-	spriteData.y = 0;
+	Entity::update(frameTime);
+	spriteData.y += frameTime * velocity.y;
 }
 
 void Obstacles::draw()

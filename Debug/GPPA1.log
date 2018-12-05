@@ -1,5 +1,7 @@
 ﻿D:\Program Files\Microsoft Visual Studio\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(387,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (HelloWorld.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  obstacles.cpp
-d:\year 3\sem 2\gameplay programming\assignment 1\obstacles.cpp(68): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-d:\year 3\sem 2\gameplay programming\assignment 1\obstacles.cpp(71): warning C4244: '=': conversion from 'UINT' to 'float', possible loss of data
+  entity.cpp
+d:\year 3\sem 2\gameplay programming\assignment 1\entity.cpp(492): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\entity.cpp(493): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\entity.cpp(495): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\entity.cpp(496): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   GPPA1.vcxproj -> D:\Year 3\Sem 2\Gameplay Programming\Assignment 1\Debug\GPPA1.exe

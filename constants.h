@@ -27,6 +27,9 @@ const char OBSTACLE1_IMAGE[] = "pictures\\obstacle1.png"; // obstacle 1
 const char OBSTACLE2_IMAGE[] = "pictures\\obstacle1.png"; // obstacle 2
 const char OBSTACLE3_IMAGE[] = "pictures\\obstacle1.png"; // obstacle 3
 const char OBSTACLE4_IMAGE[] = "pictures\\obstacle1.png"; // obstacle 4
+const char OBSTACLE5_IMAGE[] = "pictures\\obstacle2.png"; // obstacle 5
+const char HEALTHBARRED_IMAGE[] = "pictures\\healthBarRed.png";
+const char HEALTHBARBACKGROUND_IMAGE[] = "pictures\\healthBarBackground.png"; //healthbar
 
 												  // window
 const char CLASS_NAME[] = "CircleLife";
