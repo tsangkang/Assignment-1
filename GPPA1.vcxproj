@@ -77,10 +77,13 @@
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="graphics.cpp" />
+    <ClCompile Include="heart.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="CircleLife.cpp" />
     <ClCompile Include="obstacles.cpp" />
+    <ClCompile Include="obstaclesLR.cpp" />
+    <ClCompile Include="obstaclesUD.cpp" />
     <ClCompile Include="TextDX.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="winmain.cpp" />
@@ -92,10 +95,13 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="gameError.h" />
     <ClInclude Include="graphics.h" />
+    <ClInclude Include="heart.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="CircleLife.h" />
     <ClInclude Include="obstacles.h" />
+    <ClInclude Include="obstaclesLR.h" />
+    <ClInclude Include="obstaclesUD.h" />
     <ClInclude Include="TextDX.h" />
     <ClInclude Include="textureManager.h" />
   </ItemGroup>

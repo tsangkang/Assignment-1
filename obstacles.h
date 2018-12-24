@@ -9,9 +9,9 @@
 
 namespace obstaclesNS
 {
-	const int   WIDTH = 128;                // image width
-	const int   HEIGHT = 128;               // image height
-	const int   COLLISION_RADIUS = 120/2;   // for circular collision
+	const int   WIDTH = 64;                // image width
+	const int   HEIGHT = 64;               // image height
+	const int   COLLISION_RADIUS = 64/2;   // for circular collision
 	const float SPEED = 200;                // pixels per second
 	const int   X = GAME_WIDTH / 2 - WIDTH / 2; // location on screen
 	const int   Y = GAME_HEIGHT / 2 - HEIGHT / 2;
@@ -34,8 +34,6 @@ public:
 	virtual void draw();
 	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,
 		TextureManager *textureM);
-	void updateLeftRight(float frameTime);
-	void updateTopDown(float frameTime);
 	void updateRandomObstacles(float frameTime);
 };
 #endif

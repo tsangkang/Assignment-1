@@ -1,6 +1,6 @@
 //Work of Benedict Yee JianHui (S10173071G) and Tsang Hong Kang (S10172695F)
 
-#pragma once
+
 #ifndef _GAME_H			// prevent multiple definition if this
 #define _GAME_H			// .. file is included in more than one place
 #define WIN32_LEAN_AND_MEAN
@@ -11,9 +11,15 @@
 #include "input.h"
 #include "constants.h"
 #include "gameError.h"
+#include "TextDX.h"
 
 // Class declaration to be inserted here
-#endif
+namespace gameNS
+{
+	const char FONT[] = "Courier New";  // font
+	const int POINT_SIZE = 30;          // point size
+	const COLOR_ARGB FONT_COLOR = SETCOLOR_ARGB(255, 255, 15, 15);    // white
+}
 
 class Game
 {
@@ -30,6 +36,7 @@ protected:
 	float fps;					// frames per second
 	DWORD sleepTime;			// number of milli-seconds to sleep between frames
 	bool paused;				// true if game is paused
+	TextDX  dxFont;             // DirectX font for fps
 	bool initialized;
 public:
 	Game();
@@ -79,3 +86,5 @@ public:
 	// Call graphics->spriteEnd();
 	//		draw non-sprites
 };
+
+#endif

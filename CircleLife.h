@@ -10,6 +10,9 @@
 #include "circle.h"
 #include "obstacles.h"
 #include "TextDX.h"
+#include "heart.h"
+#include "obstaclesLR.h"
+#include "obstaclesUD.h"
 
 // class declaration to be inserted here
 
@@ -21,26 +24,26 @@ private:
 	// game items
 	TextureManager backgroundTexture;   // background texture
 	TextureManager circleTexture;     // circle texture
-	TextureManager healthBarBackgroundTexture;
-	TextureManager healthBarRedTexture;
-	TextureManager obstacle1Texture;
+/*	TextureManager obstacle1Texture;
 	TextureManager obstacle2Texture;
 	TextureManager obstacle3Texture;
 	TextureManager obstacle4Texture;
-	TextureManager obstacle5Texture;
+	TextureManager obstacle5Texture;*/
+	TextureManager obstacleTexture;
+	TextureManager heartTexture;
 	Image   background;                 // background image
-	Image healthBarRed;
-	Image healthBarBackground;
 	Circle   circle;                   // circle image
 
-	Obstacles obstacle1;
-	Obstacles obstacle2;
-	Obstacles obstacle3;
-	Obstacles obstacle4;
-	Obstacles obstacle5;
+	Obstacles obstacle;
 	TextDX *gameOverText;
-	bool isGameOver;
+
+	Heart heartList[MAX_HEART_NO];
+	ObstaclesLR obstaclesLRList[MAX_OBSTACLES_LR_NO];	
+	ObstaclesUD obstaclesUDList[MAX_OBSTACLES_UD_NO];
+
+
 	int health;
+	int numOfHits = 0;
 
 
 public:
@@ -65,5 +68,4 @@ public:
 
 	void CircleLife::resetAll();
 
-	bool CircleLife::checkisGameOver();
 };

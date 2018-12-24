@@ -1,4 +1,8 @@
-//Work of Benedict Yee JianHui (S10173071G) and Tsang Hong Kang (S10172695F)
+// Programming 2D Games
+// Copyright (c) 2011 by: 
+// Charles Kelly
+// textDX.cpp v1.0
+// DirectX font
 
 #include "textDX.h"
 
@@ -7,9 +11,9 @@
 //=============================================================================
 TextDX::TextDX()
 {
-	color = SETCOLOR_ARGB(0, 255, 255, 255); // default to white font
+	color = SETCOLOR_ARGB(255, 255, 255, 255); // default to white font
 
-											   // set font position
+	// set font position
 	fontRect.top = 0;
 	fontRect.left = 0;
 	fontRect.right = GAME_WIDTH;
@@ -49,6 +53,7 @@ bool TextDX::initialize(Graphics *g, int height, bool bold, bool italic,
 
 	return true;
 }
+
 //=============================================================================
 // Print text at x,y 
 // Return 0 on fail, height of text on success
@@ -69,7 +74,7 @@ int TextDX::print(const std::string &str, int x, int y)
 	D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, NULL, &rCenter, angle, NULL);
 	// Tell the sprite about the matrix "Hello Neo"
 	graphics->getSprite()->SetTransform(&matrix);
-	return dxFont->DrawTextA(graphics->getSprite(), str.c_str(), -1, &fontRect, DT_LEFT, color);
+	return dxFont->DrawText(graphics->getSprite(), str.c_str(), -1, &fontRect, DT_LEFT, color);
 }
 
 //=============================================================================
@@ -87,7 +92,7 @@ int TextDX::print(const std::string &str, RECT &rect, UINT format)
 	D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, NULL, NULL, NULL, NULL);
 	// Tell the sprite about the matrix "Hello Neo"
 	graphics->getSprite()->SetTransform(&matrix);
-	return dxFont->DrawTextA(graphics->getSprite(), str.c_str(), -1, &rect, format, color);
+	return dxFont->DrawText(graphics->getSprite(), str.c_str(), -1, &rect, format, color);
 }
 
 //=============================================================================
@@ -99,6 +104,7 @@ void TextDX::onLostDevice()
 		return;
 	dxFont->OnLostDevice();
 }
+
 //=============================================================================
 // called when graphics device is reset
 //=============================================================================

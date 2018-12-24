@@ -7,8 +7,7 @@
 CircleLife::CircleLife()
 {
 	gameOverText = new TextDX();
-	isGameOver = false;
-	health = 1;
+
 }
 
 // Destructor
@@ -27,10 +26,10 @@ void CircleLife::initialize(HWND hwnd)
 	int randomy1;
 	int randomy2;
 	srand(time(NULL));
-	randomx1 = rand() % (GAME_WIDTH + 1 + 0);
-	randomx2 = rand() % (GAME_WIDTH + 1 + 0);
-	randomy1 = rand() % (GAME_HEIGHT + 1 + 0);
-	randomy2 = rand() % (GAME_HEIGHT + 1 + 0);
+	randomx1 = rand() % (GAME_WIDTH + 1 - obstaclesNS::WIDTH);
+	randomx2 = rand() % (GAME_WIDTH + 1 - obstaclesNS::WIDTH);
+	randomy1 = rand() % (GAME_HEIGHT + 1 - obstaclesNS::HEIGHT);
+	randomy2 = rand() % (GAME_HEIGHT + 1 - obstaclesNS::HEIGHT);
 							// all the textures
 	if (!backgroundTexture.initialize(graphics, background_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background texture"));
@@ -38,7 +37,7 @@ void CircleLife::initialize(HWND hwnd)
 	if (!circleTexture.initialize(graphics, CIRCLE_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing circle texture"));
 
-	if (!obstacle1Texture.initialize(graphics, OBSTACLE1_IMAGE))
+/*	if (!obstacle1Texture.initialize(graphics, OBSTACLE1_IMAGE))       preliminary obstacles
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle1 texture"));
 
 	if (!obstacle2Texture.initialize(graphics, OBSTACLE2_IMAGE))
@@ -51,7 +50,10 @@ void CircleLife::initialize(HWND hwnd)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle4 texture"));
 
 	if (!obstacle5Texture.initialize(graphics, OBSTACLE5_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle5 texture"));
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle5 texture"));*/
+
+	if (!obstacleTexture.initialize(graphics, OBSTACLE_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle texture"));
 
 
 	// background
@@ -68,27 +70,7 @@ void CircleLife::initialize(HWND hwnd)
 	circle.setEdgeRight(16);
 	circle.setEdgeTop(16);
 
-	//healthbar
-	if (!healthBarBackgroundTexture.initialize(graphics, HEALTHBARBACKGROUND_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing healthBarBackground texture"));
-
-	if (!healthBarRedTexture.initialize(graphics, HEALTHBARRED_IMAGE))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing healthBarRed texture"));
-
-	if (!healthBarRed.initialize(graphics, 292, 137, 1, &healthBarRedTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing healthBarRed"));
-
-	if (!healthBarBackground.initialize(graphics, 292, 137, 1, &healthBarBackgroundTexture))
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing healthBarBackground"));
-
-	healthBarRed.setX(0);
-	healthBarRed.setY(0);
-	healthBarBackground.setX(0);
-	healthBarBackground.setY(0);
-	healthBarRed.setScale(0.5f);
-	healthBarBackground.setScale(0.5f);
-
-	//obstacle1
+	/*//obstacle1
 	if (!obstacle1.initialize(this, obstaclesNS::WIDTH, obstaclesNS::HEIGHT, obstaclesNS::TEXTURE_COLS, &obstacle1Texture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing obstacle1"));
 	obstacle1.setFrames(obstaclesNS::START_FRAME, obstaclesNS::END_FRAME);
@@ -146,12 +128,40 @@ void CircleLife::initialize(HWND hwnd)
 	obstacle5.setEdgeBottom(69);
 	obstacle5.setEdgeRight(69);
 	obstacle5.setEdgeTop(69);
-	obstacle5.setVelocity(VECTOR2(obstaclesNS::SPEED, -obstaclesNS::SPEED));
+	obstacle5.setVelocity(VECTOR2(obstaclesNS::SPEED, -obstaclesNS::SPEED));*/
 
-	//game over text
-	if (gameOverText->initialize(graphics, 30, true, false, "Arial") == false)
-		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing pausedText font"));
+	for (int i = 0; i < MAX_OBSTACLES_LR_NO; i++)
+	{
+		if (!obstaclesLRList[i].initialize(this, obstaclesLRNS::WIDTH, obstaclesLRNS::HEIGHT, obstaclesLRNS::TEXTURE_COLS, &obstacleTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player ship"));
+		obstaclesLRList[i].setFrames(obstaclesLRNS::START_FRAME, obstaclesLRNS::END_FRAME);
+		obstaclesLRList[i].setCurrentFrame(obstaclesLRNS::START_FRAME);
+		obstaclesLRList[i].setX(0);
+		obstaclesLRList[i].setVelocity(VECTOR2(-obstaclesLRNS::SPEED, 0));
+		//obstaclesLRList[i].setRadians(-obstaclesLRNS::ROTATION_RATE * 2); //for rotation
+		obstaclesLRList[i].setY(rand() % (GAME_HEIGHT + 1 - obstaclesNS::HEIGHT));
+	}
+
+	for (int i = 0; i < MAX_OBSTACLES_UD_NO; i++)
+	{
+		if (!obstaclesUDList[i].initialize(this, obstaclesUDNS::WIDTH, obstaclesUDNS::HEIGHT, obstaclesUDNS::TEXTURE_COLS, &obstacleTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player ship"));
+		obstaclesUDList[i].setFrames(obstaclesUDNS::START_FRAME, obstaclesUDNS::END_FRAME);
+		obstaclesUDList[i].setCurrentFrame(obstaclesUDNS::START_FRAME);
+		obstaclesUDList[i].setX(rand() % (GAME_WIDTH + 1 - obstaclesNS::WIDTH));
+		obstaclesUDList[i].setVelocity(VECTOR2(0, -obstaclesUDNS::SPEED));
+		//obstaclesUDList[i].setRadians(-obstaclesUDNS::ROTATION_RATE * 2); //for rotation
+		obstaclesUDList[i].setY(0);
+	}
+
+
+
+	if (!heartTexture.initialize(graphics, HEART_IMAGE))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing heart texture"));
+
 }
+
+
 // Update all game items
 void CircleLife::update()
 {
@@ -181,13 +191,29 @@ void CircleLife::update()
 	}
 	//update entities
 	circle.update(frameTime);
-	obstacle1.updateLeftRight(frameTime);
-	obstacle2.updateTopDown(frameTime);
-	obstacle3.updateLeftRight(frameTime);
-	obstacle4.updateTopDown(frameTime);
-	obstacle5.updateRandomObstacles(frameTime);
-	healthBarRed.update(frameTime);
-	healthBarBackground.update(frameTime);
+
+
+	for (int i = 0; i < MAX_OBSTACLES_LR_NO; i++)
+	{
+		obstaclesLRList[i].updateLeftRight(frameTime);
+	}
+	for (int i = 0; i < MAX_OBSTACLES_UD_NO; i++)
+	{
+		obstaclesUDList[i].updateUpDown(frameTime);
+	}
+
+
+	for (int i = 0; i < MAX_HEART_NO; i++)
+	{
+		if (!heartList[i].initialize(this, heartNS::WIDTH, heartNS::HEIGHT, heartNS::TEXTURE_COLS, &heartTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing heart "));
+		heartList[i].setFrames(heartNS::HEART_START_FRAME, heartNS::HEART_END_FRAME);
+		heartList[i].setCurrentFrame(heartNS::HEART_START_FRAME);
+		heartList[i].setDegrees(0);
+		heartList[i].setX(GAME_WIDTH / 20 * (MAX_HEART_NO - i));
+		heartList[i].setY(GAME_HEIGHT / 18);
+		heartList[i].setScale(heartNS::MAX_HEART_SCALE);
+	}
 
 	if (GetAsyncKeyState(VK_ESCAPE) != 0)
 	{
@@ -195,17 +221,6 @@ void CircleLife::update()
 	}
 	else
 		return;
-
-	if (health <= 0)
-	{
-		isGameOver == true;
-	}
-	else
-	{
-		health = health - 1;
-		isGameOver == false;
-	}
-
 }
 
 // Artificial Intelligence
@@ -217,35 +232,70 @@ void CircleLife::ai()
 void CircleLife::collisions()
 {
 	VECTOR2 collisionVector;
-	if ((circle.collidesWith(obstacle1, collisionVector)) || (circle.collidesWith(obstacle2, collisionVector)) 
-		|| circle.collidesWith(obstacle3, collisionVector) || circle.collidesWith(obstacle4, collisionVector) || circle.collidesWith(obstacle5, collisionVector))
-	
+	for (int i = 0; i < MAX_OBSTACLES_LR_NO; i++)
 	{
-		//if (obstacle1.PixelPerfectCollision(obstacle1.getSpriteDataRect, circle.getSpriteDataRect) == 1)
-			exitGame();
-		//else
-			//return;
+		if (circle.collidesWith(obstaclesLRList[i], collisionVector))
+		{
+			obstaclesLRList[i].setScale(0);
+			obstaclesLRList[i].setActive(false);
+			if (numOfHits < MAX_HEART_NO)
+			{
+				numOfHits++;
+			}
+		}
+		else if (circle.collidesWith(obstaclesUDList[i], collisionVector))
+		{
+			obstaclesUDList[i].setScale(0);
+			obstaclesUDList[i].setActive(false);
+				if (numOfHits < MAX_HEART_NO)
+				{
+					numOfHits++;
+				}
+		}
 	}
 }
 // Render game items
 void CircleLife::render()
 {
+	const int BUF_SIZE = 20;
+	static char buffer[BUF_SIZE];
 	graphics->spriteBegin();                // begin drawing sprites
 
 	background.draw();                      // add the pictures to the scene
 	circle.draw();
-	obstacle1.draw();
-	obstacle2.draw();
-	obstacle3.draw();
-	obstacle4.draw();
-	obstacle5.draw();
-	healthBarBackground.draw();
-	healthBarRed.draw();
 
-	if (isGameOver)
+	for (int i = 0; i < MAX_OBSTACLES_LR_NO; i++)
 	{
-		gameOverText->setFontColor(graphicsNS::RED);
-		gameOverText->print("Game Over. Press Esc to exit!", GAME_WIDTH / 2, GAME_HEIGHT / 2);
+		obstaclesLRList[i].draw();
+	}
+
+	for (int i = 0; i < MAX_OBSTACLES_UD_NO; i++)
+	{
+		obstaclesUDList[i].draw();
+	}
+	// to check that MAX heart no is still greater than numofhits and draw out the corresponding number of hearts according to
+	// numofhits < max heart no
+	// so for example if number of hits = 1, the for loop will only draw 2 hearts since i < 3, and only 1 and 2 fulfils the condition
+	if (numOfHits < MAX_HEART_NO)
+	{
+		for (int i = numOfHits; i < MAX_HEART_NO; i++)
+		{
+			heartList[i].draw();
+		}
+	}
+
+	if (numOfHits >= MAX_HEART_NO)
+	{
+		const int BUF_SIZE = 100;
+		static char buffer[BUF_SIZE];
+		// prints out GAME OVER once num of hits becomes 3
+		_snprintf_s(buffer, BUF_SIZE, "GAME OVER. Press Escape to exit game.");
+		dxFont.print(buffer, GAME_WIDTH / 3, GAME_HEIGHT / 3);
+		paused = true;
+		if (input->isKeyDown(ESC_KEY))
+		{
+			exitGame();
+		}
 	}
 	graphics->spriteEnd();                  // end drawing sprites
 }
@@ -255,13 +305,8 @@ void CircleLife::releaseAll()
 {
 	backgroundTexture.onLostDevice();
 	circleTexture.onLostDevice();
-	obstacle1Texture.onLostDevice();
-	obstacle2Texture.onLostDevice();
-	obstacle3Texture.onLostDevice();
-	obstacle4Texture.onLostDevice();
-	obstacle5Texture.onLostDevice();
-	healthBarBackgroundTexture.onLostDevice();
-	healthBarRedTexture.onLostDevice();
+	obstacleTexture.onLostDevice();
+	heartTexture.onLostDevice();
 	Game::releaseAll();
 	return;
 }
@@ -271,18 +316,9 @@ void CircleLife::resetAll()
 {
 	backgroundTexture.onResetDevice();
 	circleTexture.onResetDevice();
-	obstacle1Texture.onResetDevice();
-	obstacle2Texture.onResetDevice();
-	obstacle3Texture.onResetDevice();
-	obstacle4Texture.onResetDevice();
-	obstacle5Texture.onResetDevice();
-	healthBarBackgroundTexture.onResetDevice();
-	healthBarRedTexture.onResetDevice();
+	obstacleTexture.onResetDevice();
+	heartTexture.onResetDevice();
 	Game::resetAll();
 	return;
 }
 
-bool CircleLife::checkisGameOver() 
-{
-	return isGameOver;
-}

@@ -25,13 +25,8 @@
 // graphic images
 const char background_IMAGE[] = "pictures\\background3.png";  // photo source courtesy of pexel
 const char CIRCLE_IMAGE[] = "pictures\\circle.png";   // player character
-const char OBSTACLE1_IMAGE[] = "pictures\\obstacle1.png"; // obstacle 1
-const char OBSTACLE2_IMAGE[] = "pictures\\obstacle1.png"; // obstacle 2
-const char OBSTACLE3_IMAGE[] = "pictures\\obstacle1.png"; // obstacle 3
-const char OBSTACLE4_IMAGE[] = "pictures\\obstacle1.png"; // obstacle 4
-const char OBSTACLE5_IMAGE[] = "pictures\\obstacle2.png"; // obstacle 5
-const char HEALTHBARRED_IMAGE[] = "pictures\\healthBarRed.png";
-const char HEALTHBARBACKGROUND_IMAGE[] = "pictures\\healthBarBackground.png"; //healthbar
+const char OBSTACLE_IMAGE[] = "pictures\\obstacle1.png"; // obstacle
+const char HEART_IMAGE[] = "pictures\\heart.png"; //heart texture
 
 												  // window
 const char CLASS_NAME[] = "CircleLife";
@@ -66,4 +61,9 @@ const UCHAR CIRCLE_UP_KEY = VK_UP;
 
 
 const UCHAR ESC_KEY = VK_ESCAPE;       // escape key
+
+const int   MAX_HEART_NO = 3; //number of hearts/lives
+const int	MAX_OBSTACLES_LR_NO = 2; //number of enemies
+const int	MAX_OBSTACLES_UD_NO = 2 ; //number of enemies
+const int   MAX_OBSTACLES_NO = 4; // number of obstacles total
 #endif

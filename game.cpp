@@ -36,6 +36,12 @@ void Game::initialize(HWND hw)
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing high resolution timer"));
 	QueryPerformanceCounter(&timeStart);		// get starting time
 	initialized = true;
+
+	// initialize DirectX font
+	if (dxFont.initialize(graphics, gameNS::POINT_SIZE, false, false, gameNS::FONT) == false)
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Failed to initialize DirectX font."));
+
+	dxFont.setFontColor(gameNS::FONT_COLOR);
 }
 // Window message handler
 LRESULT Game::messageHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
