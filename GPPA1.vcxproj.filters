@@ -37,10 +37,7 @@
     <ClCompile Include="heart.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="obstaclesLR.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="obstaclesUD.cpp">
+    <ClCompile Include="obstaclesBounce.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -84,10 +81,7 @@
     <ClInclude Include="heart.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="obstaclesLR.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="obstaclesUD.h">
+    <ClInclude Include="obstaclesBounce.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

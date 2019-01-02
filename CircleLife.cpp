@@ -21,15 +21,7 @@ void CircleLife::initialize(HWND hwnd)
 {
 	Game::initialize(hwnd); // throws GameError
 	Game::timeStart;
-	int randomx1;
-	int randomx2;
-	int randomy1;
-	int randomy2;
 	srand(time(NULL));
-	randomx1 = rand() % (GAME_WIDTH + 1 - obstaclesNS::WIDTH);
-	randomx2 = rand() % (GAME_WIDTH + 1 - obstaclesNS::WIDTH);
-	randomy1 = rand() % (GAME_HEIGHT + 1 - obstaclesNS::HEIGHT);
-	randomy2 = rand() % (GAME_HEIGHT + 1 - obstaclesNS::HEIGHT);
 							// all the textures
 	if (!backgroundTexture.initialize(graphics, background_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background texture"));
@@ -132,25 +124,25 @@ void CircleLife::initialize(HWND hwnd)
 
 	for (int i = 0; i < MAX_OBSTACLES_LR_NO; i++)
 	{
-		if (!obstaclesLRList[i].initialize(this, obstaclesLRNS::WIDTH, obstaclesLRNS::HEIGHT, obstaclesLRNS::TEXTURE_COLS, &obstacleTexture))
+		if (!obstaclesLRList[i].initialize(this, obstaclesBounceNS::WIDTH, obstaclesBounceNS::HEIGHT, obstaclesBounceNS::TEXTURE_COLS, &obstacleTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player ship"));
-		obstaclesLRList[i].setFrames(obstaclesLRNS::START_FRAME, obstaclesLRNS::END_FRAME);
-		obstaclesLRList[i].setCurrentFrame(obstaclesLRNS::START_FRAME);
+		obstaclesLRList[i].setFrames(obstaclesBounceNS::START_FRAME, obstaclesBounceNS::END_FRAME);
+		obstaclesLRList[i].setCurrentFrame(obstaclesBounceNS::START_FRAME);
 		obstaclesLRList[i].setX(0);
-		obstaclesLRList[i].setVelocity(VECTOR2(-obstaclesLRNS::SPEED, 0));
-		//obstaclesLRList[i].setRadians(-obstaclesLRNS::ROTATION_RATE * 2); //for rotation
+		obstaclesLRList[i].setVelocity(VECTOR2(-obstaclesBounceNS::SPEED, 0));
+		//obstaclesLRList[i].setRadians(-obstaclesBounceNS::ROTATION_RATE * 2); //for rotation
 		obstaclesLRList[i].setY(rand() % (GAME_HEIGHT + 1 - obstaclesNS::HEIGHT));
 	}
 
-	for (int i = 0; i < MAX_OBSTACLES_UD_NO; i++)
+	for (int i = 0; i < MAX_OBSTACLES_LR_NO; i++)
 	{
-		if (!obstaclesUDList[i].initialize(this, obstaclesUDNS::WIDTH, obstaclesUDNS::HEIGHT, obstaclesUDNS::TEXTURE_COLS, &obstacleTexture))
+		if (!obstaclesUDList[i].initialize(this, obstaclesBounceNS::WIDTH, obstaclesBounceNS::HEIGHT, obstaclesBounceNS::TEXTURE_COLS, &obstacleTexture))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player ship"));
-		obstaclesUDList[i].setFrames(obstaclesUDNS::START_FRAME, obstaclesUDNS::END_FRAME);
-		obstaclesUDList[i].setCurrentFrame(obstaclesUDNS::START_FRAME);
+		obstaclesUDList[i].setFrames(obstaclesBounceNS::START_FRAME, obstaclesBounceNS::END_FRAME);
+		obstaclesUDList[i].setCurrentFrame(obstaclesBounceNS::START_FRAME);
 		obstaclesUDList[i].setX(rand() % (GAME_WIDTH + 1 - obstaclesNS::WIDTH));
-		obstaclesUDList[i].setVelocity(VECTOR2(0, -obstaclesUDNS::SPEED));
-		//obstaclesUDList[i].setRadians(-obstaclesUDNS::ROTATION_RATE * 2); //for rotation
+		obstaclesUDList[i].setVelocity(VECTOR2(0, -obstaclesBounceNS::SPEED));
+		//obstaclesUDList[i].setRadians(-obstaclesBounceNS::ROTATION_RATE * 2); //for rotation
 		obstaclesUDList[i].setY(0);
 	}
 
@@ -197,7 +189,8 @@ void CircleLife::update()
 	{
 		obstaclesLRList[i].updateLeftRight(frameTime);
 	}
-	for (int i = 0; i < MAX_OBSTACLES_UD_NO; i++)
+
+	for (int i = 0; i < MAX_OBSTACLES_LR_NO; i++)
 	{
 		obstaclesUDList[i].updateUpDown(frameTime);
 	}
@@ -243,10 +236,10 @@ void CircleLife::collisions()
 				numOfHits++;
 			}
 		}
-		else if (circle.collidesWith(obstaclesUDList[i], collisionVector))
+		else if (circle.collidesWith(obstaclesLRList[i], collisionVector))
 		{
-			obstaclesUDList[i].setScale(0);
-			obstaclesUDList[i].setActive(false);
+			obstaclesLRList[i].setScale(0);
+			obstaclesLRList[i].setActive(false);
 				if (numOfHits < MAX_HEART_NO)
 				{
 					numOfHits++;
@@ -267,10 +260,6 @@ void CircleLife::render()
 	for (int i = 0; i < MAX_OBSTACLES_LR_NO; i++)
 	{
 		obstaclesLRList[i].draw();
-	}
-
-	for (int i = 0; i < MAX_OBSTACLES_UD_NO; i++)
-	{
 		obstaclesUDList[i].draw();
 	}
 	// to check that MAX heart no is still greater than numofhits and draw out the corresponding number of hearts according to

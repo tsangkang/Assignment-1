@@ -82,8 +82,7 @@
     <ClCompile Include="input.cpp" />
     <ClCompile Include="CircleLife.cpp" />
     <ClCompile Include="obstacles.cpp" />
-    <ClCompile Include="obstaclesLR.cpp" />
-    <ClCompile Include="obstaclesUD.cpp" />
+    <ClCompile Include="obstaclesBounce.cpp" />
     <ClCompile Include="TextDX.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="winmain.cpp" />
@@ -100,8 +99,7 @@
     <ClInclude Include="input.h" />
     <ClInclude Include="CircleLife.h" />
     <ClInclude Include="obstacles.h" />
-    <ClInclude Include="obstaclesLR.h" />
-    <ClInclude Include="obstaclesUD.h" />
+    <ClInclude Include="obstaclesBounce.h" />
     <ClInclude Include="TextDX.h" />
     <ClInclude Include="textureManager.h" />
   </ItemGroup>

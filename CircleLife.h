@@ -11,8 +11,7 @@
 #include "obstacles.h"
 #include "TextDX.h"
 #include "heart.h"
-#include "obstaclesLR.h"
-#include "obstaclesUD.h"
+#include "obstaclesBounce.h"
 
 // class declaration to be inserted here
 
@@ -38,9 +37,8 @@ private:
 	TextDX *gameOverText;
 
 	Heart heartList[MAX_HEART_NO];
-	ObstaclesLR obstaclesLRList[MAX_OBSTACLES_LR_NO];	
-	ObstaclesUD obstaclesUDList[MAX_OBSTACLES_UD_NO];
-
+	ObstaclesBounce obstaclesLRList[MAX_OBSTACLES_LR_NO];	
+	ObstaclesBounce obstaclesUDList[MAX_OBSTACLES_LR_NO];
 
 	int health;
 	int numOfHits = 0;
