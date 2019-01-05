@@ -19,6 +19,8 @@ namespace obstaclesNS
 	const int   TEXTURE_COLS = 1;       // texture has 2 columns
 	const int   START_FRAME = 0;        // starts at frame 1
 	const int   END_FRAME = 0;          // no animation
+	const int   OBSTACLES_MIN_SPEED = 100.0f;
+	const int   OBSTACLES_MAX_SPEED = 300.0f;
 }
 
 class Obstacles : public Entity            // inherits from Entity class
@@ -35,6 +37,7 @@ public:
 	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,
 		TextureManager *textureM);
 	void updateRandomObstacles(float frameTime);
+	virtual void update(float frameTime);
 };
 #endif
 

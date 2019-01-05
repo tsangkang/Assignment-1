@@ -131,7 +131,7 @@ void CircleLife::initialize(HWND hwnd)
 		obstaclesLRList[i].setX(0);
 		obstaclesLRList[i].setVelocity(VECTOR2(-obstaclesBounceNS::SPEED, 0));
 		//obstaclesLRList[i].setRadians(-obstaclesBounceNS::ROTATION_RATE * 2); //for rotation
-		obstaclesLRList[i].setY(rand() % (GAME_HEIGHT + 1 - obstaclesNS::HEIGHT));
+		obstaclesLRList[i].setY(rand() % (GAME_HEIGHT - obstaclesNS::HEIGHT));
 	}
 
 	for (int i = 0; i < MAX_OBSTACLES_LR_NO; i++)
@@ -140,13 +140,23 @@ void CircleLife::initialize(HWND hwnd)
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player ship"));
 		obstaclesUDList[i].setFrames(obstaclesBounceNS::START_FRAME, obstaclesBounceNS::END_FRAME);
 		obstaclesUDList[i].setCurrentFrame(obstaclesBounceNS::START_FRAME);
-		obstaclesUDList[i].setX(rand() % (GAME_WIDTH + 1 - obstaclesNS::WIDTH));
+		obstaclesUDList[i].setX(rand() % (GAME_WIDTH - obstaclesNS::WIDTH));
 		obstaclesUDList[i].setVelocity(VECTOR2(0, -obstaclesBounceNS::SPEED));
 		//obstaclesUDList[i].setRadians(-obstaclesBounceNS::ROTATION_RATE * 2); //for rotation
 		obstaclesUDList[i].setY(0);
 	}
 
-
+	for (int i = 0; i < MAX_OBSTACLES_NO; i++)
+	{
+		if (!obstaclesFlyInList[i].initialize(this, obstaclesBounceNS::WIDTH, obstaclesBounceNS::HEIGHT, obstaclesBounceNS::TEXTURE_COLS, &obstacleTexture))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player ship"));
+		obstaclesFlyInList[i].setFrames(obstaclesBounceNS::START_FRAME, obstaclesBounceNS::END_FRAME);
+		obstaclesFlyInList[i].setCurrentFrame(obstaclesBounceNS::START_FRAME);
+		obstaclesFlyInList[i].setX(GAME_WIDTH - obstaclesNS::WIDTH);
+		obstaclesFlyInList[i].setVelocity(VECTOR2(-obstaclesBounceNS::SPEED, 0));
+		//obstaclesFlyInList[i].setRadians(-obstaclesBounceNS::ROTATION_RATE * 2); //for rotation
+		obstaclesFlyInList[i].setY(rand() % (GAME_HEIGHT - obstaclesNS::HEIGHT));
+	}
 
 	if (!heartTexture.initialize(graphics, HEART_IMAGE))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing heart texture"));
@@ -195,7 +205,10 @@ void CircleLife::update()
 		obstaclesUDList[i].updateUpDown(frameTime);
 	}
 
-
+	for (int i = 0; i < MAX_OBSTACLES_NO; i++)
+	{
+		obstaclesFlyInList[i].update(frameTime);
+	}
 	for (int i = 0; i < MAX_HEART_NO; i++)
 	{
 		if (!heartList[i].initialize(this, heartNS::WIDTH, heartNS::HEIGHT, heartNS::TEXTURE_COLS, &heartTexture))
@@ -225,7 +238,7 @@ void CircleLife::ai()
 void CircleLife::collisions()
 {
 	VECTOR2 collisionVector;
-	for (int i = 0; i < MAX_OBSTACLES_LR_NO; i++)
+	for (int i = 0; i < MAX_OBSTACLES_NO; i++)
 	{
 		if (circle.collidesWith(obstaclesLRList[i], collisionVector))
 		{
@@ -245,6 +258,16 @@ void CircleLife::collisions()
 					numOfHits++;
 				}
 		}
+		
+		else if (circle.collidesWith(obstaclesFlyInList[i], collisionVector))
+		{
+			obstaclesFlyInList[i].setScale(0);
+			obstaclesFlyInList[i].setActive(false);
+			if (numOfHits < MAX_HEART_NO)
+			{
+				numOfHits++;
+			}
+		}
 	}
 }
 // Render game items
@@ -261,6 +284,10 @@ void CircleLife::render()
 	{
 		obstaclesLRList[i].draw();
 		obstaclesUDList[i].draw();
+	}
+	for (int i = 0; i < MAX_OBSTACLES_NO; i++)
+	{
+		obstaclesFlyInList[i].draw();
 	}
 	// to check that MAX heart no is still greater than numofhits and draw out the corresponding number of hearts according to
 	// numofhits < max heart no

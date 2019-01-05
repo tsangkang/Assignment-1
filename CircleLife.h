@@ -39,7 +39,7 @@ private:
 	Heart heartList[MAX_HEART_NO];
 	ObstaclesBounce obstaclesLRList[MAX_OBSTACLES_LR_NO];	
 	ObstaclesBounce obstaclesUDList[MAX_OBSTACLES_LR_NO];
-
+	Obstacles obstaclesFlyInList[MAX_OBSTACLES_NO];
 	int health;
 	int numOfHits = 0;
 

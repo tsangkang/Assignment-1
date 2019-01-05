@@ -32,6 +32,24 @@ void Obstacles::updateRandomObstacles(float frameTime)
 	spriteData.y += frameTime * velocity.y;
 }
 
+
+void Obstacles::update(float frameTime)
+{
+	Entity::update(frameTime);
+
+	spriteData.x += frameTime * velocity.x;         // move ship along X 
+	spriteData.y += frameTime * velocity.y;         // move ship along Y 
+
+
+	// GPP
+	//randomisng the y coordinates when the ships reappear at the right side
+	if (spriteData.x + obstaclesNS::WIDTH < 0)
+	{
+		spriteData.x = GAME_WIDTH;
+		setY(rand() % (GAME_HEIGHT - obstaclesNS::HEIGHT));
+		setVelocity(-VECTOR2(MIN_MAX_RAND(obstaclesNS::OBSTACLES_MIN_SPEED, obstaclesNS::OBSTACLES_MAX_SPEED), 0));
+	}
+}
 void Obstacles::draw()
 {
 	Image::draw();              // draw circle

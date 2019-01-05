@@ -1,5 +1,25 @@
 ﻿D:\Program Files\Microsoft Visual Studio\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (HelloWorld.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  obstaclesBounce.cpp
-d:\year 3\sem 2\gameplay programming\assignment 1\obstaclesbounce.cpp(14): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
-d:\year 3\sem 2\gameplay programming\assignment 1\obstaclesbounce.cpp(15): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+  CircleLife.cpp
+d:\year 3\sem 2\gameplay programming\assignment 1\obstacles.h(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\obstacles.h(23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\heart.h(26): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\year 3\sem 2\gameplay programming\assignment 1\circlelife.cpp(24): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\circlelife.cpp(134): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\circlelife.cpp(143): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\circlelife.cpp(158): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\circlelife.cpp(174): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\circlelife.cpp(180): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\circlelife.cpp(219): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+  obstacles.cpp
+d:\year 3\sem 2\gameplay programming\assignment 1\obstacles.h(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\obstacles.h(23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\obstacles.cpp(14): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\obstacles.cpp(15): warning C4244: '=': conversion from 'float' to 'LONG', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\obstacles.cpp(49): warning C4244: 'argument': conversion from 'UINT' to 'float', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\obstacles.cpp(50): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+  winmain.cpp
+d:\year 3\sem 2\gameplay programming\assignment 1\obstacles.h(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\obstacles.h(23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\year 3\sem 2\gameplay programming\assignment 1\heart.h(26): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Generating Code...
   GPPA1.vcxproj -> D:\Year 3\Sem 2\Gameplay Programming\Assignment 1\Debug\GPPA1.exe

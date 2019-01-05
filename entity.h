@@ -193,6 +193,11 @@ public:
 
 
 	int PixelPerfectCollision(SpriteData circle, SpriteData obstacle);
+
+	int MIN_MAX_RAND(int min, int max)
+	{
+		return rand() % (max - min + 1) + min;
+	}
 };
 
 #endif
